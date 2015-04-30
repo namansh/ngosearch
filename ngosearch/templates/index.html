@@ -1,0 +1,138 @@
+{% load staticfiles %}
+{% load compress %}
+
+<!DOC TYPE html>
+<html>
+<head>
+<title>Search NGO's</title>
+{% compress css %}
+
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all"/>
+
+{% endcompress %}
+
+{% compress js %}
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script type="text/javascript" src= "{% static "js/move-top.js" %}"></script>
+<script type="text/javascript" src="{% static "js/easing.js" %}"></script>
+	<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+	</script>
+	 <script>
+             $( "span.menu").click(function() {
+                  $(  "ul.res" ).slideToggle("slow", function() {
+                       // Animation complete.
+                  });
+             });
+     </script>
+
+
+{% endcompress %}
+
+
+<!--web-fonts-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!--js-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- start-smoth-scrolling -->
+<!-- //end-smoth-scrolling -->
+</head>
+<body> 
+<!--header start here-->
+ <div class="header">
+ 	  <div class="container">
+ 	       <div class="header-main home">
+ 	        	<div class="logo">
+ 	        		<a href="/"><img src= "{% static "images/logo.png" %}" alt=""></a>
+ 	        	</div> 
+ 	        	<span class="menu"> <img src= "{% static "images/icon.png" %}"> </span>
+ 	        	<div class="header-navg">
+ 	        		<ul class="res">
+ 	        			<li><a class="active" href="/">HOME</a></li>
+ 	        			<li><a href="aboutus.html">ABOUT US</a></li>
+ 	        			<li><a href="jobs.html">JOBS</a></li>
+ 	        			<li><a href="clients.html">CLIENTS</a></li>
+ 	        			<li><a href="employers.html">EMPLOYERS</a></li>
+ 	        			<li><a href="contactus.html">CONTACT US</a></li>
+ 	        		</ul>
+ 	        	</div>
+ 	        	<div class="clearfix"> </div>
+ 	       </div>
+ 	       <div class="header-bottom">
+ 	       	     <h1>l'm looking for..</h1>
+ 	       	     <form action="/search" method="get">
+ 	       	     	<input type="text" placeholder="Search here ..." name="q" onblur="if (this.value == 'Search here ...') {this.value = '';}">
+ 	       	     	<input type="submit" class="ser" value="Search"><br>
+ 	       	      <!-- label class="checkbox" >
+ 	       	             <input type="checkbox" value="checked">
+ 	       	              Full Time
+ 	       	      </label -->
+ 	       	      <!-- label class="checkbox" >
+ 	       	           <input type="checkbox" value="checked">
+ 	       	           Part Time/Casual/Freelance
+ 	       	      </label -->
+ 	       	      <!-- select name="state">
+					<option value="select your location"> Select your location</option>
+					<option value="saab">Rajasthan</option>
+					<option value="fiat">Madhya Pradesh</option>
+					<option value="audi">Uttar Pradesh</option>
+				</select -->
+ 	       	     </form>                
+ 	       </div>
+ 	  </div>
+ </div>
+ <div class="intro-strip"> </div>
+<!--about start here-->
+ <div class="intro">
+ 	  <div class="container">
+ 	  	<div class="intro-main">
+ 	  		    <h2>We're leaders in</h2>
+ 	  		    <h3>Creative Digital Recruitmemt</h3>
+ 	  		    <span class="b"> </span>
+ 	  		    <p>Based in Surry Hills, the creative hub of Sydney we are surrounded by creativity<br>and that reflects on the type of jobs we recruit for. </p>
+ 	  	        <h4><a href="#"> FIND OUT MORE ABOUT US!</a></h4>
+ 	  	</div> 
+ 	  	<div class="clearfix"> </div>	 
+ 	 </div>
+ </div>
+</body>
+<!--contant start here-->
+<div class="strip"> </div>
+<div class="contant">
+	  <div class="container">
+	  	   <div class="contant-main">
+	  	   	    <h3>Subscribe to our Mailing List</h3>
+	  	   	    <span class="search"> <input type="text" value="Enter Your Email Address"onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Your Email Address';}"/>
+
+ 	  	        <input type="submit" value=""></span>
+ 	  	   </div>
+	  </div>
+</div>
+<!--footer start here-->
+<div class="strip"> </div>
+<div class="footer-h">
+	  <div class="container">
+	  	    <div class="footer-main">
+	  	    	<div class="col-md-6 footer-left">
+		  	    	 <p class="data"> <a href="mailto:example@mail.com"> Hello@ twobytes.com.au </a> <span class="d"> </span></p>
+		             <p> 2014 &copy Template by <a href="http://w3layouts.com/"> W3layouts </a></p>
+	  	    	</div>
+	  	    	<div class="col-md-6 footer-right">
+	  	             <ul>
+	  	             	<li><a href="#"> <span class="x"> </span> </a></li>
+	  	             	<li class="m">692</li>
+	  	             	<li><a href="#"> <span class="y"> </span> </a></li>
+	  	             	<li class="r"> 117</li>
+	  	             </ul>
+	  	    	</div>
+	  	    <div class="clearfix"> </div>
+	  	    </div>
+	  </div>
+</div>
+</html>

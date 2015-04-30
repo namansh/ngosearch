@@ -1,0 +1,2 @@
+{{ object.NGO_Name }}
+{{ object.Major_Activities_Achievements }}
