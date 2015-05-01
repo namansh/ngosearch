@@ -1,121 +1,105 @@
-{% load staticfiles %}
-{% load compress %}
 
 
-{% compress css %}
 
-<link href="{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all">
-<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all"/>
+<style>
+table, th, td {
+    border: 1px solid black;
+    align : left;
+}
+</style>
 
-{% endcompress %}
 
-{% compress js %}
-<script src="{% static "js/jquery.min.js" %}"></script>
-<script type="text/javascript" src= "{% static "js/move-top.js" %}"></script>
-<script type="text/javascript" src="{% static "js/easing.js" %}"></script>
-	<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$(".scroll").click(function(event){		
-					event.preventDefault();
-					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-				});
-			});
-	</script>
-<!-- //end-smoth-scrolling -->
-<script src="{% static "js/easyResponsiveTabs.js"%}" type="text/javascript"></script>
-		    <script type="text/javascript">
-			    $(document).ready(function () {
-			        $('#horizontalTab').easyResponsiveTabs({
-			            type: 'default', //Types: default, vertical, accordion           
-			            width: 'auto', //auto or any width like 600px
-			            fit: true   // 100% fit in a container
-			        });
-			    });
-			   </script>	
 
- 	        		 <script>
-			                                                      $( "span.menu").click(function() {
-			                                                                                        $(  "ul.res" ).slideToggle("slow", function() {
-			                                                                                         // Animation complete.
-			                                                                                         });
-			                                                                                         });
-		                                                     </script>
-
-{% endcompress %}
 
 
 
 <!DOC TYPE html>
 <html>
 <head>
-<title>Two-Bytes Bootstrap Website Template| Home :: w3layouts</title>
-<!--web-fonts-->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-<!--js-->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Searched NGO</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 </head>
 <body> 
-<!--header start here-->
- <div class="header-b">
- 	  <div class="container">
- 	       <div class="header-main">
- 	        	<div class="logo">
- 	        		<a href="index.html"><img src="{% static "images/logo.png" %}" alt=""></a>
- 	        	</div> 
- 	        	<span class="menu"> <img src="{% static "images/icon.png" %}"> </span>
- 	        	<div class="header-navg">
- 	        		<ul class="res">
- 	        			<li><a href="/index.html">HOME</a></li>
- 	        			<li><a class="active" href="aboutus.html">ABOUT US</a></li>
- 	        			<li><a href="/jobs.html">JOBS</a></li>
- 	        			<li><a href="/clients.html">CLIENTS</a></li>
- 	        			<li><a href="/employers.html">EMPLOYERS</a></li>
- 	        			<li><a href="/contactus.html">CONTACT US</a></li>
- 	        		</ul>
- 	        	</div>
- 	        	<div class="clearfix"> </div>
+
+ 	  
+ 	      
+ 	        
+ 	        		
+ 	        		<div class="form-group form-group-lg">
+ 	       	    <form action="/search" method="get">
+ 	       	    <div class="col-sm-10">
+ 	       	     	<input type="text" class="form-control" id="focusedInput" placeholder="NGO search here ..." name="q" onblur="if (this.value == 'NGO search here ...') {this.value = '';}">
+ 	       	       </div>	
+ 	       	     	<input type="submit" class="btn btn-default" value="Search"><br>
+ 	       	    
+ 	       	     </form>                
  	       </div>
- 	 </div>
-</div>   
 
 
 
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>            
-<div class="jobs">
-	 <div class="container">
-	  	 <div class="jobs-main">
-	  	 	  <h3> SEARCH RESULTS</h3>
-	  	 	 <div class="job-top">
+	<div class="container">
+	  	 
+	  	 	  
+	  	 	  
+	  	 	  	    <div class="col-md-8 job-column">
+	  	 	  	    
+	  	 	  	    	{% if page.object_list %}
+	  	 	  	    	<div class="jobs-main">
+	  	 	 	 <div class="job-top">
 	  	 	  	    <div class="col-md-8 job-left">
-	  	 	  	  	     <h4> <b>Showing {{ page.object_list|length }} of {{ page.paginator.count }} Results | Page {{ page.number }} of {{ page.paginator.num_pages }}</b></h4>
+	  	 	  	  	     <h4> <b>Top Results below : </b></h4>
 	  	 	  	     </div>
 	  	 	  	   <div class="clearfix"> </div>
 	  	 	  </div>
-	  	 	  <div class="job-bottom">
-	  	 	  	    <div class="col-md-3 job-column">
-	  	 	  	    	<ul>
-            {% for result in page.object_list %}
-                <li>
-                    <a href="{{ result.object.Website_Url }}">{{ result.object.NGO_Name }}</a> - {{result.object.State}}
-                </li>
-            {% empty %}
-                <p>No results found.</p>
-            {% endfor %}
+	  	 	 
+							<table class="table table-striped">
+								<col align="left">
+								<col align="right">
+								<thead>
+								
+								<tr>
+								
+									<th>Name</th>
+									<th>Achievements</th>
+								<th>State</th>
+									
+									
+								</tr>
+							
+								</thead>
 
-            {% if page.has_previous or page.has_next %}
+								{% for result in page.object_list %} {% if result.object.Website_Url %}
+								
+
+								<tr >
+									<td><a href="{{ result.object.Website_Url }}">{% if result.object.NGO_Name %}{{result.object.NGO_Name }}{% else %}{{""}}{% endif%}</a>
+									<td>{{ result.object.Major_Activities_Achievements|slice:"0:45"|add:"..." }}</td>
+									</td>
+
+									<td>{{result.object.State}}</td>
+								</tr>
+								
+								{% endif %} {% empty %}
+								<p>No results found.</p>
+								{% endfor %}
+							</table>
+							{% if page.has_previous or page.has_next %}
                 <div>
                     {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
                     |
                     {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
                 </div>
             {% endif %}
-
-	  	 	  	    	</ul>
+		{% else %}
+		 <h4> <b>Opps Nothing found </b></h4>
+	  	 	 {% endif %}	    	
 	   	 	  	    </div>
 	  	 	  	    <div class="clearfix"> </div>
 	  	 	  </div>
 	  	 </div>
 	  </div>
-</div>
+
             
