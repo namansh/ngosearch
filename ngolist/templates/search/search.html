@@ -97,7 +97,7 @@
 	  	 	  	    	<ul>
             {% for result in page.object_list %}
                 <li>
-                    <a href="{{ result.object.Website_Url }}">{{ result.object.NGO_Name }}</a>
+                    <a href="{{ result.object.Website_Url }}">{{ result.object.NGO_Name }}</a> - {{result.object.State}}
                 </li>
             {% empty %}
                 <p>No results found.</p>

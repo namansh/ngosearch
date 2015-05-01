@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from ngolist.forms import StateSelectSearchForm
 
 
 def searchpage(request):
-    return render(request, "index.html")
+    form = StateSelectSearchForm()
+    return render(request, "index.html", {'form': form})
 
 def jobspage(request):
     return render(request, "jobs.html")

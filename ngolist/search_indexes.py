@@ -4,7 +4,8 @@ from ngolist.models import Ngolist
  
 class NgolistIndex (indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
-    #state = indexes.CharField(model_attr='State')
+    state = indexes.CharField(model_attr='State')
+    
     #city = indexes.CharField(model_attr='City')
     #pub_date = indexes.DateTimeField(model_attr='created')
  

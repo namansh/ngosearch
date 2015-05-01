@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from views import *
-
+from ngolist.views import MySearchView
+from ngolist.forms import StateSelectSearchForm
 
 urlpatterns = patterns('',
     # Examples:
@@ -15,7 +16,10 @@ urlpatterns = patterns('',
     url(r"^contactus", contactuspage, name="contactus"),
     url(r"^clients", clientspage, name="clients"),
     url(r"^aboutus", aboutuspage, name="aboutus"),
-    url(r'^search/', include('haystack.urls')),
+
+    url(r'^search/', MySearchView(form_class = StateSelectSearchForm), name='haystack_search'),
+    
+    #url(r'^search/', include('haystack.urls')),
     
     url(r'^admin/', include(admin.site.urls)),
     

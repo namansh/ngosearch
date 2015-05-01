@@ -3,8 +3,7 @@ from django.db import models
 class Ngolist(models.Model):
     
     id = models.IntegerField(primary_key=True)
-    NGO_Name = models.CharField(max_length=200)
-    
+    NGO_Name = models.CharField(max_length=200)    
     Unique_Id_of_VO_NGO = models.CharField(max_length=200)
     Chief_Functionary = models.CharField(max_length=200)
     Chairman = models.CharField(max_length=200)
