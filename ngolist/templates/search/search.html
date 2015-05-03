@@ -1,105 +1,109 @@
-
-
-
-<style>
-table, th, td {
-    border: 1px solid black;
-    align : left;
-}
-</style>
-
-
-
-
-
-
+{% load staticfiles %}
 <!DOC TYPE html>
 <html>
 <head>
 <title>Searched NGO</title>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<style>
+.container-body {
 
+	align: left;	
+}
+.NGOName{
+	font-size: 20px;
+	font-family: "Times New Roman", Times, serif;
+}
+.Achievement{
+	color :grey;
+}
+.state{
+	color: green;
+}
+div {
+  display: block;
+}
+</style>
 </head>
-<body> 
+<body>
+	<div class="container" style="background-color :#f1f1f1;height:80px;width:100%; overflow:auto;">
+	<div style=" float:left;postion=relative;height=100%;width:10%;">
+	<div style="position:relative;width:85%;"><a href="/index.html"><img src="{% static "images/logo1.png"  %}" alt="Not available"></a>
+	</div></div>
+		<div class="container-body" style="top:40%;">
+		
+		<div class="form-group form-group-lg" >
+			<p><form action="/search" method="get"  >
+				<div class="col-sm-5" >
+					<input type="text" value={{query}} class="form-control" id="focusedInput"
+										placeholder="NGO search here ..." name="q"
+						onblur="if (this.value == 'NGO search here ...') {this.value = '';}">
+				</div>
+				<input type="submit" class="btn btn-default" value="Search"><br>
 
- 	  
- 	      
- 	        
- 	        		
- 	        		<div class="form-group form-group-lg">
- 	       	    <form action="/search" method="get">
- 	       	    <div class="col-sm-10">
- 	       	     	<input type="text" class="form-control" id="focusedInput" placeholder="NGO search here ..." name="q" onblur="if (this.value == 'NGO search here ...') {this.value = '';}">
- 	       	       </div>	
- 	       	     	<input type="submit" class="btn btn-default" value="Search"><br>
- 	       	    
- 	       	     </form>                
- 	       </div>
+			</form></p>
+			</div>
+		</div>
+	</div>
+
+	
+	<div style=" float:left;postion=relative;height=100%;width:10%;">
+	advertisement</div>
+	
+	<div class="container" style="float:left;">
+		
+		<div class="col-md-8 job-column">
+			{% if page.object_list %}
+			<div class="jobs-main">
+				<div class="job-top">
+					<div class="col-md-8 job-left">
+						<h4>
+							<font color="grey">Showing : {{ page.object_list|length }} of {{page.paginator.count}} results</font>
+						</h4>
+						
+					</div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="container-header">
+
+					{% for result in page.object_list %}
+				
 
 
+					
+						<p><div class="NGOname"><a href="{{ result.object.Website_Url }}">
+						{% if result.object.NGO_Name %}{{result.object.NGO_Name|truncatechars:50 }}
+						{% else	%}{{""}}
+						{% endif%}</a></div>
+						<div class="State">{{result.object.City|add:", "|lower|title}}{{result.object.State|lower|title}}</div>
+						<div class="Achievement">{{result.object.Major_Activities_Achievements|truncatechars:200|lower|capfirst}}</div>
+						
 
-	<div class="container">
-	  	 
-	  	 	  
-	  	 	  
-	  	 	  	    <div class="col-md-8 job-column">
-	  	 	  	    
-	  	 	  	    	{% if page.object_list %}
-	  	 	  	    	<div class="jobs-main">
-	  	 	 	 <div class="job-top">
-	  	 	  	    <div class="col-md-8 job-left">
-	  	 	  	  	     <h4> <b>Top Results below : </b></h4>
-	  	 	  	     </div>
-	  	 	  	   <div class="clearfix"> </div>
-	  	 	  </div>
-	  	 	 
-							<table class="table table-striped">
-								<col align="left">
-								<col align="right">
-								<thead>
-								
-								<tr>
-								
-									<th>Name</th>
-									<th>Achievements</th>
-								<th>State</th>
-									
-									
-								</tr>
-							
-								</thead>
+						</p>
+					<div></div>
 
-								{% for result in page.object_list %} {% if result.object.Website_Url %}
-								
-
-								<tr >
-									<td><a href="{{ result.object.Website_Url }}">{% if result.object.NGO_Name %}{{result.object.NGO_Name }}{% else %}{{""}}{% endif%}</a>
-									<td>{{ result.object.Major_Activities_Achievements|slice:"0:45"|add:"..." }}</td>
-									</td>
-
-									<td>{{result.object.State}}</td>
-								</tr>
-								
-								{% endif %} {% empty %}
-								<p>No results found.</p>
-								{% endfor %}
-							</table>
-							{% if page.has_previous or page.has_next %}
+					
+					{% empty %}
+					<p>No results found.</p>
+					{% endfor %}
+				</div>
+				{% if page.has_previous or page.has_next %}
                 <div>
-                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                 <ul class="pager">
+                   {% if page.has_previous %} <li class="previous"><a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">&laquo; Previous</a></li>{% endif %}
                     |
-                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                   {% if page.has_next %} <li class="next"><a href="?q={{ query }}&amp;page={{ page.next_page_number }}">Next &raquo;</a>{% endif %}</li>
+                </ul>
                 </div>
             {% endif %}
 		{% else %}
 		 <h4> <b>Opps Nothing found </b></h4>
-	  	 	 {% endif %}	    	
-	   	 	  	    </div>
-	  	 	  	    <div class="clearfix"> </div>
-	  	 	  </div>
-	  	 </div>
-	  </div>
-
-            
+				{% endif %}
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	</div>
+	</body>

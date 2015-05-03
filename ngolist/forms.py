@@ -1,5 +1,6 @@
 from django import forms
 from haystack.forms import SearchForm
+from haystack.inputs import Raw
 
 
 class StateSelectSearchForm(SearchForm):
@@ -8,6 +9,9 @@ class StateSelectSearchForm(SearchForm):
     def search(self):
         # First, store the SearchQuerySet received from other processing.
         sqs = super(StateSelectSearchForm, self).search()
+        sqs = sqs.filter(ngo_url = Raw("[* TO *]"))
+        #sqs = sqs.filter(NGO_Name = Raw("[* TO *]"))
+        #sqs = sqs.exclude(Website_Url__isnull = True).exclude(Website_Url__exact='')
 
         if not self.is_valid():
             return self.no_query_found()
