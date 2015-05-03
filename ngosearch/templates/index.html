@@ -1,57 +1,84 @@
-{% load staticfiles %}
-{% load compress %}
+{% load staticfiles %} {% load compress %}
 
 <!DOC TYPE html>
 <html>
 <head>
 <title>Search NGO's</title>
 <style>
-
-
 </style>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<style>
+.body{
+overflow-y:scroll;
+overflow-x:scroll;
+}
+.search {
+	
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	width:100%;
+	/* bring your own prefixes */
+	transform: translate(-15%, -15%);
+}
 
+.container-body {
+
+	align: left;
+}
+</style>
 </head>
-<body> 
-<!--header start here-->
- <div class="header">
- 	  <div class="container">
- 	       
- 	       
- 	       	     <h1>l'm looking for..</h1>
- 	       	     <div></div>
- 	       	     <div class="form-group form-group-lg">
- 	       	    <form class="form-horizontal" action="/search" method="get">
- 	       	   <div class="form-group">
- 	       	   	<div class="col-sm-10">
- 	       	     	<input type="text" class="form-control" id="focusedInput" placeholder="NGO search here ..." name="q" onblur="if (this.value == 'NGO search here ...') {this.value = '';}">
- 	       	       </div>	
- 	       	       </div>
- 	       	        <div class="form-group">        
-     					 <div class="col-sm-offset-4 col-sm-10">
- 	       	     	<input type="submit" class="btn btn-default" value="Search"><br>
- 	       	     	</div>
- 	       	    </div>
- 	       	     </form>                
- 	       </div>        
- 	     
- 	  </div>
- </div>
- 
-</body>
+<body>
+	<!--header start here-->
 
-<!--footer start here-->
-<div class="strip"> </div>
-<div class="footer-h">
-	  <div class="container">
-	  	    <div class="footer-main">
-	  	    	<div class="col-md-6 footer-left">
-		  	    	 <p class="data"> <a href=""> About us </a> <span class="d"> </span></p>
-		        </div>
-	  	    	
-	  	    
-	  	    </div>
-	  </div>
-</div>
+	<div class="search" >
+
+
+		<div>
+			<h1>l'm looking for..</h1>
+		</div>
+
+		
+			<form action="/search" method="get" role="form" class="form-horizontal">
+
+			
+				<div class="form-group">
+					 <div class="col-xs-4">
+						<input type="text"  class="form-control" id="focusedInput"
+							placeholder="NGO search here ..." name="q"
+							onblur="if (this.value == 'NGO search here ...') {this.value = '';}">
+					</div>
+				</div>
+				
+				<div class="form-group">
+				 <div class="col-sm-offset-0 col-sm-10">
+						<input type="submit" class="btn btn-default" value="Search"><br>
+			</div>
+				</div>
+			
+			</form>
+		
+
+
+
+
+
+
+		<div class="footer-h" >
+
+			<div class="footer-main">
+				<div class="col-md-3 footer-left">
+					<p class="data" style="text-align:center;">
+						<a href="https://en.wikipedia.org/wiki/User:Namansharma13"> About us </a> <span class="d"> </span>
+					</p>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+</body>
 </html>
