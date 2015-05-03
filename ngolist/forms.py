@@ -2,7 +2,6 @@ from django import forms
 from haystack.forms import SearchForm
 from haystack.inputs import Raw
 
-
 class StateSelectSearchForm(SearchForm):
     state = forms.CharField(label='State', required=False)
 
@@ -18,5 +17,7 @@ class StateSelectSearchForm(SearchForm):
 
         if self.cleaned_data['state']:
             sqs = sqs.filter(state=self.cleaned_data['state'])
+            
+            
 
         return sqs
