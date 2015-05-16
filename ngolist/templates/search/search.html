@@ -105,11 +105,12 @@
 
 	<!-- Intro Header -->
 	<header class="container content-section-search text-left" >
+	<div class="container">
 	{% if page.object_list %}
 		
 				<div class="row">
 				
-					<div class="col-md-8 job-left" style="padding-left:190px;">
+					<div class="col-md-8 job-left" >
 						<h4>
 							<font color="grey">Showing : {{ page.object_list|length }} of {{page.paginator.count}} results</font>
 						</h4>
@@ -141,7 +142,7 @@
 			</div> -->
 			
 			
-					<div class="col-md-8 job-left" style="padding-left:190px;">
+					<div class="col-md-8 job-left" >
 					
 					{% for result in page.object_list %}
 				
@@ -192,6 +193,7 @@
 			<p>Copyright &copy; spreadsmiles.in 2015</p>
 		</div>
 	</footer>
+	</div>
 	</header>
 
 	<!-- jQuery -->
