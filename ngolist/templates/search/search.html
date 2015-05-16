@@ -1,11 +1,16 @@
-{% load staticfiles %}
-<!DOC TYPE html>
-<html>
+ {% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Searched NGO</title>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Search NGO's</title>
+
 <style>
 .container-body {
 
@@ -16,58 +21,119 @@
 	font-family: "Times New Roman", Times, serif;
 }
 .Achievement{
-	color :grey;
+	color :rgb(100,130,100);
 }
 .state{
 	color: green;
 }
-div {
-  display: block;
-}
+
 </style>
+
+
+<!-- Bootstrap Core CSS -->
+<link href="{%static "css/bootstrap.min.css" %}"rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="{%static "css/grayscale.css" %}" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="{%static "font-awesome/css/font-awesome.min.css" " %}"
+	rel="stylesheet" type="text/css">
+<link
+	href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"
+	rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700"
+	rel="stylesheet" type="text/css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
-<body>
-	<div class="container" style="background-color :#f1f1f1;height:80px;width:100%; overflow:auto;">
-	<div style=" float:left;postion=relative;height=100%;width:10%;">
-	<div style="position:relative;width:85%;"><a href="/index.html"><img src="{% static "images/logo1.png"  %}" alt="Not available"></a>
-	</div></div>
-		<div class="container-body" style="top:40%;">
-		
-		<div class="form-group form-group-lg" >
-			<p><form action="/search" method="get"  >
-				<div class="col-sm-5" >
-					<input type="text" value={{query}} class="form-control" id="focusedInput"
-										placeholder="NGO search here ..." name="q"
-						onblur="if (this.value == 'NGO search here ...') {this.value = '';}">
-				</div>
-				<input type="submit" class="btn btn-default" value="Search"><br>
 
-			</form></p>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" style="background-attachment: fixed;">
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container">
+		
+			 <div class="collapse navbar-collapse navbar-left" >
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/index.html"> Home </a>
+                    </li>
+                   
+                </ul>
+            </div>
+			<div class="navbar-header" style="padding-top:7px;">
+				<!-- <button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-main-collapse">
+					<i class="fa fa-bars"></i>
+				</button> -->
+				
+				<form class="form-search" action="/search" method="get">
+							<input  size="70" style="line-height: 28px; color:#000;" name="q" type="text" placeholder="  Search NGO here">
+								<button type="submit" class="btn btn-primary">Search</button>
+							</form>
+				
+				<!-- <a class="navbar-brand page-scroll" href="#page-top"> <i
+					class="fa fa-play-circle"></i> <span class="light">Search</span>
+				</a> -->
 			</div>
-		</div>
-	</div>
 
-	
-	<div style=" float:left;postion=relative;height=100%;width:10%;">
-	advertisement</div>
-	
-	<div class="container" style="float:left;">
+			
+			
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<!-- Intro Header -->
+	<header class="container content-section-search text-left" >
+	{% if page.object_list %}
 		
-		<div class="col-md-8 job-column">
-			{% if page.object_list %}
-			<div class="jobs-main">
-				<div class="job-top">
-					<div class="col-md-8 job-left">
+				<div class="row">
+				
+					<div class="col-md-8 job-left" style="padding-left:190px;">
 						<h4>
 							<font color="grey">Showing : {{ page.object_list|length }} of {{page.paginator.count}} results</font>
 						</h4>
 						
-					</div>
-					<div class="clearfix"></div>
-				</div>
-
-				<div class="container-header">
-
+				
+			</div>
+		</div>
+	
+		<div class="row">
+			<!-- <div class="col-lg-8 col-lg-offset-2">
+				<h2>Contact Us</h2>
+				<p>Feel free to email us to provide some feedback on our
+					searches so we can improve and make he planet more smiling</p>
+				<p>
+					<a href="mailto:siddharthjhanwar@yahoo.in">Mail Here</a>
+				</p>
+				<ul class="list-inline banner-social-buttons">
+					<li><a href="https://twitter.com/jhanwarsid"
+						class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i>
+							<span class="network-name">Twitter</span></a></li>
+					<li><a
+						href="https://github.com/IronSummitMedia/startbootstrap"
+						class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i>
+							<span class="network-name">Github</span></a></li>
+					<li><a href="https://plus.google.com/+Startbootstrap/posts"
+						class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i>
+							<span class="network-name">facebook</span></a></li>
+				</ul>
+			</div> -->
+			
+			
+					<div class="col-md-8 job-left" style="padding-left:190px;">
+					
 					{% for result in page.object_list %}
 				
 
@@ -78,11 +144,10 @@ div {
 						{% else	%}{{""}}
 						{% endif%}</a></div>
 						<div class="State">{{result.object.City|add:", "|lower|title}}{{result.object.State|lower|title}}</div>
-						<div class="Achievement">{{result.object.Major_Activities_Achievements|truncatechars:200|lower|capfirst}}</div>
+						<div class="Achievement"><p id="achievement">{{result.object.Major_Activities_Achievements|truncatechars:200|lower|capfirst}}
+						</p></div>
 						
-
-						</p>
-					<div></div>
+					<div>
 
 					
 					{% empty %}
@@ -97,13 +162,45 @@ div {
                    {% if page.has_next %} <li class="next"><a href="?q={{ query }}&amp;page={{ page.next_page_number }}">Next &raquo;</a>{% endif %}</li>
                 </ul>
                 </div>
+                </div>
             {% endif %}
 		{% else %}
-		 <h4> <b>Opps Nothing found </b></h4>
+		
+		 <h4 style="padding-left:190px;"> <b>Opps Nothing found </b></h4>
 				{% endif %}
 			</div>
-			<div class="clearfix"></div>
+		
+		
+
+	
+
+
+
+
+		<!-- Footer -->
+	<footer>
+		<div class="container text-center">
+			<p>Copyright &copy; spreadsmiles.in 2015</p>
 		</div>
-	</div>
-	</div>
-	</body>
+	</footer>
+	</header>
+
+	<!-- jQuery -->
+	<script src="{%static "js/jquery.js" %}"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="{%static "js/bootstrap.min.js" %}"></script>
+
+	<!-- Plugin JavaScript -->
+	<script src="{%static "js/jquery.easing.min.js" %}"></script>
+
+	<!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script src="{%static "js/grayscale.js" %}"></script>
+
+</body>
+
+</html>
