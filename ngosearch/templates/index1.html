@@ -1,0 +1,91 @@
+{% load staticfiles %}
+
+<!DOC TYPE html>
+<html>
+<head>
+<title>Search NGO's</title>
+<style>
+</style>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<style>
+body {
+	background: url("static/images/background.jpg");
+	background-size: 100% 80%;
+	background-repeat: no-repeat;
+}
+
+#search {
+	position: relative;
+	/* 	top: 40%;
+	left: 50%; */
+	margin-top: 20%;
+	margin-left: 50%;
+	/* width: 100%; */
+	/* bring your own prefixes */
+	transform: translate(-15%, -15%);
+}
+
+#footer {
+	position: relative;
+	margin-top: 200px;
+	margin-left: 100px;
+}
+</style>
+</head>
+<body bgcolor="#E6E6FA">
+	<!--header start here-->
+
+	<div id="search">
+
+
+		<div>
+			<h1>
+				<font color="blue">l'm looking for..</font>
+			</h1>
+		</div>
+
+
+		<form action="/search" method="get" role="form"
+			class="form-horizontal">
+
+
+			<div class="form-group">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" id="focusedInput"
+						placeholder="NGO search here ..." name="q"
+						onblur="if (this.value == 'NGO search here ...') {this.value = '';}">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-0 col-sm-10">
+					<input type="submit" class="btn btn-default" value="Search"><br>
+				</div>
+			</div>
+
+		</form>
+
+
+
+
+
+
+
+
+
+		<div id="footer">
+
+			<div class="footer-main">
+				<div class="col-md-3 footer-left">
+					<p class="data" style="text-align: center;">
+						<a href="aboutus.html"> About us </a>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

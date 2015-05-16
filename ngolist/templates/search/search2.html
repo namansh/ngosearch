@@ -1,0 +1,128 @@
+{% load staticfiles %}
+<!DOC TYPE html>
+<html>
+<head>
+<title>Searched NGO</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<style>
+.container-body {
+
+	align: left;	
+}
+.NGOName{
+	font-size: 20px;
+	font-family: "Times New Roman", Times, serif;
+}
+.Achievement{
+	color :grey;
+}
+.state{
+	color: green;
+}
+div {
+  display: block;
+}
+</style>
+<script>
+var status = "less";
+
+function toggleText(text)
+{
+   // var text=result.object.Major_Activities_Achievements;
+	alert(text);
+    if (status == "less") {
+        document.getElementById("achievement").innerHTML=text;
+        document.getElementById("toggleButton").innerText = "See Less";
+        status = "more";
+    } else if (status == "more") {
+        document.getElementById("achievement").innerHTML = "";
+        document.getElementById("toggleButton").innerText = "See More";
+        status = "less"
+    }
+}
+</script>
+</head>
+<body>
+	<div class="container" style="background-color :#f1f1f1;height:80px;width:100%; overflow:auto;">
+	<div style=" float:left;postion=relative;height=100%;width:10%;">
+	<div style="position:relative;width:85%;"><a href="/index.html"><img src="{% static "images/logo1.png"  %}" alt="Not available"></a>
+	</div></div>
+		<div class="container-body" style="top:40%;">
+		
+		<div class="form-group form-group-lg" >
+			<p><form action="/search" method="get"  >
+				<div class="col-sm-5" >
+					<input type="text" value={{query}} class="form-control" id="focusedInput"
+										placeholder="NGO search here ..." name="q"
+						onblur="if (this.value == 'NGO search here ...') {this.value = '';}">
+				</div>
+				<input type="submit" class="btn btn-default" value="Search"><br>
+
+			</form></p>
+			</div>
+		</div>
+	</div>
+
+	
+	<div style=" float:left;postion=relative;height=100%;width:10%;">
+	advertisement</div>
+	
+	<div class="container" style="float:left;">
+		
+		<div class="col-md-8 job-column">
+			{% if page.object_list %}
+			<div class="jobs-main">
+				<div class="job-top">
+					<div class="col-md-8 job-left">
+						<h4>
+							<font color="grey">Showing : {{ page.object_list|length }} of {{page.paginator.count}} results</font>
+						</h4>
+						
+					</div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="container-header">
+
+					{% for result in page.object_list %}
+				
+
+
+					
+						<p><div class="NGOname"><a href="{{ result.object.Website_Url }}">
+						{% if result.object.NGO_Name %}{{result.object.NGO_Name|truncatechars:50 }}
+						{% else	%}{{""}}
+						{% endif%}</a></div>
+						<div class="State">{{result.object.City|add:", "|lower|title}}{{result.object.State|lower|title}}</div>
+						<div class="Achievement"><p id="achievement">{{result.object.Major_Activities_Achievements|truncatechars:200|lower|capfirst}}
+						<a onclick="toggle("{{result.object.Major_Activities_Achievements}}")" href="javascript:void(0);">See More</a></p></div>
+						
+
+						</p>
+					<div></div>
+
+					
+					{% empty %}
+					<p>No results found.</p>
+					{% endfor %}
+				</div>
+				{% if page.has_previous or page.has_next %}
+                <div>
+                 <ul class="pager">
+                   {% if page.has_previous %} <li class="previous"><a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">&laquo; Previous</a></li>{% endif %}
+                    |
+                   {% if page.has_next %} <li class="next"><a href="?q={{ query }}&amp;page={{ page.next_page_number }}">Next &raquo;</a>{% endif %}</li>
+                </ul>
+                </div>
+            {% endif %}
+		{% else %}
+		 <h4> <b>Opps Nothing found </b></h4>
+				{% endif %}
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	</div>
+	</body>
